@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+    const Title = () => (<h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Hello</h3>); //함수로 변경
+    const Button = () => (<button onClick={() => console.log("button")}>Click me</button>); //함수로 변경
+    const Container = () => (<div><Title /> <Button /></div>); //함수로 변경, JSX는 함수를 tag와 같이 가져옴
+    ReactDOM.render(<Container />, root); //즉, 하나의 component를 다른 component에 넣는 방법
+</script>
+
+</html>
