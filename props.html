@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+    //function Btn (props) { //대표로 Btn 함수 component 하나만 만들되, App 함수 component에 의해 조정되도록
+    function Btn ( {text, onClick} ) { //굳이 props -> props.text로 할 필요 없이, 애초에 props object 중에서 text property만 가져올 것!
+        return (        
+            <button
+                onClick={onClick} //이 onClick은 실제로 eventlistener!
+                style={{
+                    backgroundColor: "tomato",
+                    color: "white",
+                    padding: "10px 20px",
+                    border: 0,
+                    borderRadius: 10,
+                    fontSize: 16,
+                }}
+            >
+                {text}
+            </button> //Btn component로서 동일하되, 글씨만 달라지도록 {text}라는 변수로 넣음
+        );
+    }
+    const MemorizedBtn = React.memo(Btn)
+    //state의 modifier로 인해 re-render될 때, 원래 state를 포함하는 전체 component가 render됨
+    //그 중에서도 state 없이 변동되지 않는 부분(Btn의 text="Continue")은 render하지 마! -> memo의 기능
+    function App () {
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
+        return (
+            <div>
+                <MemorizedBtn text={value} onClick={changeValue}/>
+                <MemorizedBtn text="Continue" />
+            </div> //Btn({text:"Save Changes"})와 동일한 작용, 
+                //즉, props는 아래에서 호출한 function component에서 설정한 어떤 property라도 첫번째 인자로 넣어줌
+                //props의 형태는 설정한 property를 가진 'object'
+                //중요! prop으로 넣은 onClick은 실제로 eventlistener가 아니고, 단순히 이름일 뿐
+                //직접 바탕이 되는 Btn의 html tag에 적용을 시켜줘야 함!
+        );
+    }
+    ReactDOM.render(<App/>, root);
+</script>
+</html>

@@ -14,14 +14,14 @@
         render(); //re-render(update)의 역할
     }
     function render() {
-        ReactDOM.render(<Container/>, root);
+        ReactDOM.render(<App/>, root);
     }
-    const Container = () => (
+    const App = () => ( //Container를 App으로 이름 변경
         <div>
             <h3>Total clicks: {counter}</h3>
             <button onClick={countUP}>Click me</button>
         </div>
     ); //span.innerText = `Total clicks: ${counter}`와 다르게 {}만 사용
-    render(); //가장 처음에만 render하고 끝
+    render(); //가장 처음에만 render하고 끝 //React.js는 변경된 곳만 render!
 </script>
 </html>

@@ -9,9 +9,25 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     const root = document.getElementById("root");
-    const Title = () => (<h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Hello</h3>); //함수로 변경
-    const Button = () => (<button onClick={() => console.log("button")}>Click me</button>); //함수로 변경
-    const Container = () => (<div><Title /> <Button /></div>); //함수로 변경, JSX는 함수를 tag와 같이 가져옴
+    function Title() {
+        return (<h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+            Hello I'm a title
+            </h3>
+        );
+    } //함수로 변경
+    const Button = () => (
+        <button 
+            style={{backgroundColor: "tomato"}} 
+            onClick={() => console.log("im clicked")}>
+            Click me
+            </button>
+    ); //함수로 변경
+    const Container = () => (
+        <div>
+            <Title />
+            <Button />
+        </div>
+    ); //함수로 변경, JSX는 함수를 tag와 같이 가져옴 & Component의 첫 글자는 무조건 대문자!(기존 html tag과 혼동X)
     ReactDOM.render(<Container />, root); //즉, 하나의 component를 다른 component에 넣는 방법
 </script>
 
